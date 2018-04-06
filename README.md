@@ -1,0 +1,1 @@
+# bidorbuy-storeintegrator-core

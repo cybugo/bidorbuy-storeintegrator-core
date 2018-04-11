@@ -125,7 +125,7 @@ class Settings
             self::NAME_EXPORT_VISIBILITIES => array(),
             self::NAME_EXCLUDE_CATEGORIES => array(),
             self::NAME_LOGGING_LEVEL => 'error',
-            self::NAME_LOGGING_APPLICATION => 'all',
+            self::NAME_LOGGING_APPLICATION => self::NAME_LOGGING_APPLICATION_OPTION_EXTENSION,
             self::NAME_TOKEN_DOWNLOAD => self::generateToken(),
             self::NAME_TOKEN_EXPORT => self::generateToken(),
             /*
@@ -259,10 +259,10 @@ class Settings
                     ),
                 ),
                 self::NAME_LOGGING_APPLICATION => array(
-                    self::NAME_WORDINGS_TITLE => 'Logging Event',
+                    self::NAME_WORDINGS_TITLE => 'Logging only the certain types of errors',
                     self::NAME_WORDINGS_DESCRIPTION => 'The option describes, what kind of errors need to log. ' .
-                        'All (logging all messages), PHP (logging only php errors), ' .
-                        'Extension (logging only Store integrator messages)',
+                        'All (logging all messages), Only PHP Errors (logging only php errors), ' .
+                        'Only Store Integrator Errors (logging only Store integrator messages)',
                     self::NAME_WORDINGS_VALIDATOR => array(
                         'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
                         'validateNameLoggingApplication'
@@ -481,7 +481,8 @@ class Settings
 
     public static function validateNameLoggingApplication($value)
     {
-        return in_array($value, self::getLoggingApplicationOptions());
+        $availableOptions = array_keys(self::getLoggingApplicationOptions());
+        return in_array($value, $availableOptions);
     }
 
     public function getUsername()
@@ -708,9 +709,9 @@ class Settings
     public static function getLoggingApplicationOptions()
     {
         return array(
-            self::NAME_LOGGING_APPLICATION_OPTION_ALL,
-            self::NAME_LOGGING_APPLICATION_OPTION_PHP,
-            self::NAME_LOGGING_APPLICATION_OPTION_EXTENSION,
+            self::NAME_LOGGING_APPLICATION_OPTION_ALL => 'All',
+            self::NAME_LOGGING_APPLICATION_OPTION_PHP => 'Only PHP Errors',
+            self::NAME_LOGGING_APPLICATION_OPTION_EXTENSION => 'Only Store Integrator Errors',
         );
     }
 

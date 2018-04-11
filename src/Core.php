@@ -1019,7 +1019,21 @@ class Core
                 $productsData = array();
                 $keys = array_keys($this->buildArrayToInsert($productsData, false));
 
-                $fullDescription = $this->tradefeed->swapSummaryDescription(
+                /**
+                 *  Add full description to product array, for parse product description
+                 *  and get images from description
+                 *  count() - 3 because:
+                 *  Product = Array(
+                 *       Summary     => string, (-1)
+                 *       Description => string  (-1)
+                 *       Product     => array() (-1, iteration start from zero)
+                 */
+                for ($i = 0; $i <= count($products) - 3; $i++) {
+                    $products[$i][Tradefeed::NAME_PRODUCT_SUMMARY] = $products[Tradefeed::NAME_PRODUCT_SUMMARY];
+                    $products[$i][Tradefeed::NAME_PRODUCT_DESCRIPTION] = $products[Tradefeed::NAME_PRODUCT_DESCRIPTION];
+                }
+
+                $this->tradefeed->swapSummaryDescription(
                     $products[Tradefeed::NAME_PRODUCT_SUMMARY],
                     $products[Tradefeed::NAME_PRODUCT_DESCRIPTION]
                 );
@@ -1037,18 +1051,6 @@ class Core
                         "$1$baseURL/$2$3",
                         $products[Tradefeed::NAME_PRODUCT_DESCRIPTION]
                     );
-                }
-                /**
-                 *  Add full description to product array, for parse product description
-                 *  and get images from description
-                 *  count() - 3 because:
-                 *  Product = Array(
-                 *       Summary     => string, (-1)
-                 *       Description => string  (-1)
-                 *       Product     => array() (-1, iteration start from zero)
-                 */
-                for ($i = 0; $i <= count($products) - 3; $i++) {
-                    $products[$i][Tradefeed::NAME_PRODUCT_DESCRIPTION] = $fullDescription;
                 }
 
                 /*

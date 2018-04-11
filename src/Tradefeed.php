@@ -171,6 +171,8 @@ class Tradefeed
             self::NAME_PRODUCT_MARKET_PRICE => null,
             self::NAME_PRODUCT_AVAILABLE_QTY => null,
             self::NAME_PRODUCT_IMAGES => array(),
+            self::NAME_PRODUCT_SUMMARY => null,
+            self::NAME_PRODUCT_DESCRIPTION => null,
         );
 
         $data = array_merge($defaults, $data);
@@ -249,11 +251,6 @@ class Tradefeed
         $data[self::NAME_PRODUCT_CONDITION] = self::setProductCondition($data[self::NAME_PRODUCT_CONDITION]);
         /********************/
 
-        $fullDescription = self::swapSummaryDescription(
-            $data[self::NAME_PRODUCT_SUMMARY],
-            $data[self::NAME_PRODUCT_DESCRIPTION]
-        );
-
         $data[self::NAME_PRODUCT_IMAGE_URL] = isset($data[self::NAME_PRODUCT_IMAGE_URL])
             ? self::escapeImageUrl($data[self::NAME_PRODUCT_IMAGE_URL]) : null;
 
@@ -273,12 +270,18 @@ class Tradefeed
         $baseURL = isset($data[self::NAME_BASE_URL]) ? $data[self::NAME_BASE_URL] : '';
 
         $images = array_unique(
-            array_merge($data[self::NAME_PRODUCT_IMAGES], self::getImagesFromDescription($fullDescription, $baseURL))
+            array_merge(
+                $data[self::NAME_PRODUCT_IMAGES],
+                self::getImagesFromDescription($data[self::NAME_PRODUCT_SUMMARY], $baseURL),
+                self::getImagesFromDescription($data[self::NAME_PRODUCT_DESCRIPTION], $baseURL)
+            )
         );
         /* FEATURE 3909*/
         //$data[self::nameProductImages] = self::excludeImagesWithHttp($images);
         /* END 3909   */
         $data[self::NAME_PRODUCT_IMAGES] = $images;
+
+        self::swapSummaryDescription($data[self::NAME_PRODUCT_SUMMARY], $data[self::NAME_PRODUCT_DESCRIPTION]);
 
         return $data;
     }
@@ -698,24 +701,14 @@ class Tradefeed
     private static function buildXmlViewProduct(&$data)
     {
         $output = self::section(self::NAME_PRODUCT_ID, $data[self::NAME_PRODUCT_ID], true, 3);
-        $output .= self::section(self::NAME_PRODUCT_NAME, $data[self::NAME_PRODUCT_NAME], true, 3);
         $output .= self::section(self::NAME_PRODUCT_CODE, $data[self::NAME_PRODUCT_CODE], true, 3);
         $output .= self::section(self::NAME_PRODUCT_GTIN, $data[self::NAME_PRODUCT_GTIN], false, 3, false, true);
+        $output .= self::section(self::NAME_PRODUCT_NAME, $data[self::NAME_PRODUCT_NAME], true, 3);
         $output .= self::section(self::NAME_PRODUCT_CATEGORY, $data[self::NAME_PRODUCT_CATEGORY], true, 3);
         $output .= self::section(self::NAME_PRODUCT_PRICE, $data[self::NAME_PRODUCT_PRICE], true, 3);
         $output .= self::section(self::NAME_PRODUCT_MARKET_PRICE, $data[self::NAME_PRODUCT_MARKET_PRICE], true, 3);
         $output .= self::section(self::NAME_PRODUCT_AVAILABLE_QTY, $data[self::NAME_PRODUCT_AVAILABLE_QTY], true, 3);
         $output .= self::section(self::NAME_PRODUCT_CONDITION, $data[self::NAME_PRODUCT_CONDITION], false, 3);
-        $output .= self::section(self::NAME_PRODUCT_ATTRIBUTES, $data[self::NAME_PRODUCT_ATTRIBUTES], false, 3);
-
-        if (isset($data[self::NAME_PRODUCT_SHIPPING_CLASS])) {
-            $output .= self::section(
-                self::NAME_PRODUCT_SHIPPING_CLASS,
-                $data[self::NAME_PRODUCT_SHIPPING_CLASS],
-                true,
-                3
-            );
-        }
 
         if (isset($data[self::NAME_PRODUCT_IMAGE_URL])) {
             $output .= self::section(self::NAME_PRODUCT_IMAGE_URL, $data[self::NAME_PRODUCT_IMAGE_URL], true, 3);
@@ -732,12 +725,7 @@ class Tradefeed
         $summary = !empty($data[self::NAME_PRODUCT_SUMMARY])
             ? $data[self::NAME_PRODUCT_SUMMARY] : $data[self::NAME_PRODUCT_NAME];
 
-        $output .= self::section(
-            self::NAME_PRODUCT_SUMMARY,
-            $summary,
-            true,
-            3
-        );
+        $output .= self::section(self::NAME_PRODUCT_SUMMARY, $summary, true, 3);
 
         $strippedDescription = strip_tags($data[self::NAME_PRODUCT_DESCRIPTION], '<img>');
         $output .= self::section(
@@ -746,6 +734,17 @@ class Tradefeed
             true,
             3
         );
+
+        if (isset($data[self::NAME_PRODUCT_SHIPPING_CLASS])) {
+            $output .= self::section(
+                self::NAME_PRODUCT_SHIPPING_CLASS,
+                $data[self::NAME_PRODUCT_SHIPPING_CLASS],
+                true,
+                3
+            );
+        }
+
+        $output .= self::section(self::NAME_PRODUCT_ATTRIBUTES, $data[self::NAME_PRODUCT_ATTRIBUTES], false, 3);
 
         return self::section(self::NAME_PRODUCT, $output, false, 2);
     }

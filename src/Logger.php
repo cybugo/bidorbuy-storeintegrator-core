@@ -15,6 +15,7 @@
 namespace com\extremeidea\bidorbuy\storeintegrator\core;
 
 use Monolog\Handler\NullHandler;
+use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger as MonologLogger;
 use Monolog\Handler\StreamHandler;
 
@@ -53,10 +54,14 @@ class Logger
     {
 
         if (!$this->logger) {
-            $logName = Settings::$logsPath . '/' . sprintf("bobsi_%s.log", date('Y-m-d'));
+            $logName = Settings::$logsPath . '/bobsi.log';
             $loggingLevel = $this->getLoggingLevel();
             $this->logger = new MonologLogger(self::LOGGER_NAME);
-            $handler = ($loggingLevel > 0) ? new StreamHandler($logName, $loggingLevel) : $handler = new NullHandler();
+            $handler = new RotatingFileHandler($logName, 30, $loggingLevel);
+            $handler->setFilenameFormat('{filename}_{date}', RotatingFileHandler::FILE_PER_DAY);
+            if ($loggingLevel == 0) {
+                $handler = new NullHandler();
+            }
             $this->logger->pushHandler($handler);
 
             return $this->logger;

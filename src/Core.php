@@ -1867,6 +1867,8 @@ class Core
         $array['row_modified_on'] = date("Y-m-d H:i:s");
         $array['code'] = (isset($data[Tradefeed::NAME_PRODUCT_CODE]))
             ? $this->dbLink->escape($data[Tradefeed::NAME_PRODUCT_CODE], true) : '';
+        $array['gtin'] = (isset($data[Tradefeed::NAME_PRODUCT_GTIN]))
+            ? $this->dbLink->escape($data[Tradefeed::NAME_PRODUCT_GTIN], true) : '';
         $array['name'] = (isset($data[Tradefeed::NAME_PRODUCT_NAME]))
             ? $this->dbLink->escape($data[Tradefeed::NAME_PRODUCT_NAME], true) : '';
         $array['category'] = (isset($data[Tradefeed::NAME_PRODUCT_CATEGORY]))

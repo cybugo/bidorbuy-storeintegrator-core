@@ -65,7 +65,8 @@ class Queries
               `row_created_on` datetime NOT NULL,
               `row_modified_on` datetime NOT NULL,
               `code` varchar(128) NOT NULL,
-              `name` varchar(512)NOT NULL,
+              `gtin` varchar(65) DEFAULT NULL,
+              `name` varchar(512) NOT NULL,
               `category` varchar(2000) NOT NULL,
               `price` decimal(20,6) NOT NULL DEFAULT '0.000000',
               `market_price` decimal(20,6) DEFAULT '0.000000',
@@ -374,6 +375,9 @@ class Queries
         $query = array();
         $query[] = $this->tradefeed->section(Tradefeed::NAME_PRODUCT_ID, "', t.`product_id`, '", true, 3) . "'";
         $query[] = "'" . $this->tradefeed->section(Tradefeed::NAME_PRODUCT_CODE, "', t.`code`, '", true, 3) . "'";
+        $query[] = "'"
+            . $this->tradefeed->section(Tradefeed::NAME_PRODUCT_GTIN, "', t.`gtin`, '", false, 3, 0, true)
+            . "'";
         $query[] = "'" . $this->tradefeed->section(Tradefeed::NAME_PRODUCT_NAME, "', t.`name`, '", true, 3) . "'";
         $query[] = "IF(LENGTH(t.`category`), CONCAT('"
             . $this->tradefeed->section(

@@ -33,6 +33,7 @@ class Tradefeed
     const NAME_PRODUCT_ID = 'ID';
     const NAME_PRODUCT_NAME = 'ProductName';
     const NAME_PRODUCT_CODE = 'ProductCode';
+    const NAME_PRODUCT_GTIN = 'ProductGTIN';
     const NAME_PRODUCT_CATEGORY = 'Category';
     const NAME_PRODUCT_PRICE = 'Price';
     const NAME_PRODUCT_MARKET_PRICE = 'MarketPrice';
@@ -64,6 +65,9 @@ class Tradefeed
     const NAME_EXCLUDED_ATTRIBUTES = 'nameExcludedAttributes';
     const NAME_PRODUCT_EXCLUDED_ATTRIBUTES = 'nameProductExcludedAttributes';
     const NAME_ATTRIBUTES_ORDER = 'nameAttributesOrder';
+
+    // Max field size. See query `getInstallTradefeedTableQuery` method
+    const NAME_PRODUCT_GTIN_MAX_FIELD_SIZE = 65;
 
     private static $versionInstance;
 
@@ -106,7 +110,7 @@ class Tradefeed
         }
     }
 
-    public static function section($tag, $value, $cdata = 1, $tabCount = 0, $forceNewLine = 0)
+    public static function section($tag, $value, $cdata = 1, $tabCount = 0, $forceNewLine = 0, $mandatory = 0)
     {
         $section = !is_null($value) ? trim($value) : '';
 
@@ -115,7 +119,7 @@ class Tradefeed
             $tab .= "\t";
         }
 
-        return (strlen($section) == 0
+        return (strlen($section) == 0 && !$mandatory
             ? ''
             : ($tab . '<' . $tag . '>' . ($cdata
                     ? self::cdata($section)
@@ -161,6 +165,7 @@ class Tradefeed
     {
 
         $defaults = array(
+            self::NAME_PRODUCT_GTIN => '',
             self::NAME_PRODUCT_CATEGORY => null,
             self::NAME_PRODUCT_PRICE => null,
             self::NAME_PRODUCT_MARKET_PRICE => null,
@@ -169,6 +174,10 @@ class Tradefeed
         );
 
         $data = array_merge($defaults, $data);
+
+        $data[self::NAME_PRODUCT_GTIN] = ($data[self::NAME_PRODUCT_GTIN] > self::NAME_PRODUCT_GTIN_MAX_FIELD_SIZE)
+            ? substr($data[self::NAME_PRODUCT_GTIN], 0, self::NAME_PRODUCT_GTIN_MAX_FIELD_SIZE)
+            : $data[self::NAME_PRODUCT_GTIN];
 
         $nameExcludedAttributes =
             isset($settings[self::NAME_EXCLUDED_ATTRIBUTES]) ? $settings[self::NAME_EXCLUDED_ATTRIBUTES]
@@ -670,13 +679,13 @@ class Tradefeed
     public static function isMeasurable($valueName)
     {
         return in_array(ucfirst($valueName), array(
-                self::NAME_PRODUCT_ATTR_WIDTH,
-                self::NAME_PRODUCT_ATTR_HEIGHT,
-                self::NAME_PRODUCT_ATTR_LENGTH,
-                self::NAME_PRODUCT_ATTR_DEPTH,
-                self::NAME_PRODUCT_ATTR_WEIGHT,
-                self::NAME_PRODUCT_ATTR_SHIPPING_WEIGHT
-            ));
+            self::NAME_PRODUCT_ATTR_WIDTH,
+            self::NAME_PRODUCT_ATTR_HEIGHT,
+            self::NAME_PRODUCT_ATTR_LENGTH,
+            self::NAME_PRODUCT_ATTR_DEPTH,
+            self::NAME_PRODUCT_ATTR_WEIGHT,
+            self::NAME_PRODUCT_ATTR_SHIPPING_WEIGHT
+        ));
     }
 
     /**
@@ -691,6 +700,7 @@ class Tradefeed
         $output = self::section(self::NAME_PRODUCT_ID, $data[self::NAME_PRODUCT_ID], true, 3);
         $output .= self::section(self::NAME_PRODUCT_NAME, $data[self::NAME_PRODUCT_NAME], true, 3);
         $output .= self::section(self::NAME_PRODUCT_CODE, $data[self::NAME_PRODUCT_CODE], true, 3);
+        $output .= self::section(self::NAME_PRODUCT_GTIN, $data[self::NAME_PRODUCT_GTIN], false, 3, false, true);
         $output .= self::section(self::NAME_PRODUCT_CATEGORY, $data[self::NAME_PRODUCT_CATEGORY], true, 3);
         $output .= self::section(self::NAME_PRODUCT_PRICE, $data[self::NAME_PRODUCT_PRICE], true, 3);
         $output .= self::section(self::NAME_PRODUCT_MARKET_PRICE, $data[self::NAME_PRODUCT_MARKET_PRICE], true, 3);

@@ -58,7 +58,7 @@ class Logger
             $loggingLevel = $this->getLoggingLevel();
             $this->logger = new MonologLogger(self::LOGGER_NAME);
             $handler = new RotatingFileHandler($logName, 30, $loggingLevel);
-            $handler->setFilenameFormat('{filename}_{date}', RotatingFileHandler::FILE_PER_DAY);
+            $handler->setFilenameFormat('{filename}_{date}', 'Y-m-d');
             if ($loggingLevel == 0) {
                 $handler = new NullHandler();
             }

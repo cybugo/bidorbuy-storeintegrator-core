@@ -1655,7 +1655,12 @@ class Core
      */
     private function getServerName()
     {
-        return $this->request->server->get('HTTP_HOST') ?: $this->request->server->get('SERVER_NAME') ?: '';
+        $serverName = $this->request->server->get('HTTP_HOST') ?: $this->request->server->get('SERVER_NAME') ?: '';
+        $port = $port = $this->request->server->get('SERVER_PORT');
+        if ($serverName && $port) {
+            $serverName = str_replace(":{$port}", '', $serverName);
+        }
+        return $serverName;
     }
 
     /**

@@ -67,7 +67,8 @@ class Tradefeed
     const NAME_ATTRIBUTES_ORDER = 'nameAttributesOrder';
 
     // Max field size. See query `getInstallTradefeedTableQuery` method
-    const NAME_PRODUCT_GTIN_MAX_FIELD_SIZE = 65;
+    const NAME_PRODUCT_GTIN_MAX_LENGTH = 65;
+    const NAME_PRODUCT_NAME_MAX_LENGTH = 100;
 
     private static $versionInstance;
 
@@ -167,6 +168,7 @@ class Tradefeed
         $defaults = array(
             self::NAME_PRODUCT_GTIN => '',
             self::NAME_PRODUCT_CATEGORY => null,
+            self::NAME_PRODUCT_NAME => null,
             self::NAME_PRODUCT_PRICE => null,
             self::NAME_PRODUCT_MARKET_PRICE => null,
             self::NAME_PRODUCT_AVAILABLE_QTY => null,
@@ -177,8 +179,8 @@ class Tradefeed
 
         $data = array_merge($defaults, $data);
 
-        $data[self::NAME_PRODUCT_GTIN] = ($data[self::NAME_PRODUCT_GTIN] > self::NAME_PRODUCT_GTIN_MAX_FIELD_SIZE)
-            ? substr($data[self::NAME_PRODUCT_GTIN], 0, self::NAME_PRODUCT_GTIN_MAX_FIELD_SIZE)
+        $data[self::NAME_PRODUCT_GTIN] = ($data[self::NAME_PRODUCT_GTIN] > self::NAME_PRODUCT_GTIN_MAX_LENGTH)
+            ? substr($data[self::NAME_PRODUCT_GTIN], 0, self::NAME_PRODUCT_GTIN_MAX_LENGTH)
             : $data[self::NAME_PRODUCT_GTIN];
 
         $nameExcludedAttributes =
@@ -216,6 +218,13 @@ class Tradefeed
                 array_merge($nameExcludedAttributes, $data[self::NAME_PRODUCT_EXCLUDED_ATTRIBUTES])
             );
         }
+
+        $startStringPosition = 0;
+        $data[self::NAME_PRODUCT_NAME] = self::subString(
+            $data[self::NAME_PRODUCT_NAME],
+            $startStringPosition,
+            self::NAME_PRODUCT_NAME_MAX_LENGTH
+        );
 
         foreach ($nameAttributesOrder as $v) {
             list($k, $v) = each($v);
@@ -301,14 +310,12 @@ class Tradefeed
         $fullDescription = $description;
 
         if (strlen($summary) > 0) {
-            $isUTF8 = mb_detect_encoding($summary, 'utf-8');
-            $description = self::subString($description, 0, 8000, $isUTF8);
+            $description = self::subString($description, 0, 8000);
             $stripped = self::removeHtmlCharacters($summary);
             $summary = self::subString(
                 (strlen($stripped) > 0 ? $stripped : self::removeHtmlCharacters($description)),
                 0,
-                500,
-                $isUTF8
+                500
             );
         }
 
@@ -330,18 +337,41 @@ class Tradefeed
      *
      * @return mixed
      */
-    private static function subString($string, $start, $length, $encoding)
+    protected static function subString($string, $start, $length)
     {
-        if ($encoding) {
-            $string = mb_substr($string, $start, $length, $encoding);
-            $result = mb_strlen($string) == $length ?
-                $string = mb_substr($string, $start, mb_strrpos($string, ' ', 0, $encoding), $encoding) : $string;
+        $encoding = mb_detect_encoding($string, 'utf-8');
+        $result = $encoding ? self::multiByteSubString($string, $start, $length, $encoding)
+            : self::simpleSubString($string, $start, $length);
 
-            return $result;
+        return $result;
+    }
+
+    private static function multiByteSubString($string, $start, $length, $encoding)
+    {
+        $fullStringLength = mb_strlen($string, $encoding);
+
+        if ($fullStringLength <= $length) {
+            return $string;
+        }
+
+        $string = mb_substr($string, $start, $length, $encoding);
+        $lastSpacePosition = mb_strrpos($string, ' ', 0, $encoding);
+        $result = $lastSpacePosition ? mb_substr($string, $start, $lastSpacePosition, $encoding) : $string;
+
+        return $result;
+    }
+
+    private static function simpleSubString($string, $start, $length)
+    {
+        $fullStringLength = strlen($string);
+
+        if ($fullStringLength <= $length) {
+            return $string;
         }
 
         $string = substr($string, $start, $length);
-        $result = strlen($string) == $length ? $string = substr($string, $start, strrpos($string, ' ', 0)) : $string;
+        $lastSpacePosition = strrpos($string, ' ', 0);
+        $result = $lastSpacePosition ? substr($string, $start, $lastSpacePosition) : $string;
 
         return $result;
     }

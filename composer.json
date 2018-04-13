@@ -1,7 +1,7 @@
 {
   "name": "extremeidea/bidorbuy-storeintegrator-core",
   "description": "bidorbuy Store Integrator Core.",
-  "version": "2.4.1",
+  "version": "2.5.1",
   "autoload": {
     "psr-4": {
       "com\\extremeidea\\bidorbuy\\storeintegrator\\core\\": "src/"

@@ -26,7 +26,7 @@ class Version
 
     public static $id = 'bidorbuystoreintegrator';
     public static $version = '${project.version}.${jgit.meta.branch}.${jgit.meta.sha8}';
-    public static $coreVersion = '2.4.1';
+    public static $coreVersion = '2.5.1';
     public static $name = 'bidorbuy Store Integrator';
     public static $description = 'The bidorbuy store integrator allows you to get products from your online store 
     listed on bidorbuy quickly and easily.';

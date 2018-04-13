@@ -66,7 +66,7 @@ class Queries
               `row_modified_on` datetime NOT NULL,
               `code` varchar(128) NOT NULL,
               `gtin` varchar(65) DEFAULT NULL,
-              `name` varchar(512) NOT NULL,
+              `name` varchar(100) NOT NULL,
               `category` varchar(2000) NOT NULL,
               `price` decimal(20,6) NOT NULL DEFAULT '0.000000',
               `market_price` decimal(20,6) DEFAULT '0.000000',

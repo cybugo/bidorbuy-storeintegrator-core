@@ -1,7 +1,9 @@
-<?php
-
-/**
- * Copyright (c) 2014, 2015, 2016 Bidorbuy http://www.bidorbuy.co.za
+<?php /*
+ * #%L
+ * Bidorbuy http://www.bidorbuy.co.za
+ * %%
+ * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * %%
  * This software is the proprietary information of Bidorbuy.
  *
  * All Rights Reserved.
@@ -10,7 +12,9 @@
  * holder.
  *
  * Vendor: EXTREME IDEA LLC http://www.extreme-idea.com
- */
+ * #L%
+ */ ?>
+<?php
 
 namespace com\extremeidea\bidorbuy\storeintegrator\core;
 
@@ -25,8 +29,8 @@ class Version
     public static $platform = '';
 
     public static $id = 'bidorbuystoreintegrator';
-    public static $version = '${project.version}.${jgit.meta.branch}.${jgit.meta.sha8}';
-    public static $coreVersion = '2.5.2';
+    public static $version = '';
+    public static $coreVersion = '2.6.1';
     public static $name = 'bidorbuy Store Integrator';
     public static $description = 'The bidorbuy store integrator allows you to get products from your online store 
     listed on bidorbuy quickly and easily.';

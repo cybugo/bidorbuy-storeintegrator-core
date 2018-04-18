@@ -1,7 +1,9 @@
-<?php
-
-/**
- * Copyright (c) 2014, 2015, 2016 Bidorbuy http://www.bidorbuy.co.za
+<?php /*
+ * #%L
+ * Bidorbuy http://www.bidorbuy.co.za
+ * %%
+ * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * %%
  * This software is the proprietary information of Bidorbuy.
  *
  * All Rights Reserved.
@@ -10,7 +12,9 @@
  * holder.
  *
  * Vendor: EXTREME IDEA LLC http://www.extreme-idea.com
- */
+ * #L%
+ */ ?>
+<?php
 
 namespace com\extremeidea\bidorbuy\storeintegrator\core;
 
@@ -42,6 +46,7 @@ class Settings
 
     const NAME_EXPORT_QUANTITY_MORE_THAN = 'exportQuantityMoreThan';
     const NAME_EXCLUDE_CATEGORIES = 'excludeCategories';
+    const NAME_EXCLUDE_ALLOW_OFFERS_CATEGORIES = 'excludeAllowOffersCategories';
     const NAME_EXPORT_STATUSES = 'exportStatuses';
     const NAME_EXPORT_VISIBILITIES = 'exportVisibilities';
 
@@ -61,6 +66,7 @@ class Settings
     const PARAM_CALLBACK_GET_PRODUCTS = 'callbackGetProducts';
     const PARAM_CALLBACK_GET_BREADCRUMB = 'callbackGetBreadcrumb';
     const PARAM_CATEGORIES = 'categories';
+    const PARAM_ALLOW_OFFERS_CATEGORIES = 'allowOffersCategories';
     const PARAM_ITEMS_PER_ITERATION = 'itemsPerIteration';
     const PARAM_ITERATION = 'iteration';
     const PARAM_REVISION = 'revision';
@@ -124,6 +130,7 @@ class Settings
             self::NAME_EXPORT_STATUSES => array(),
             self::NAME_EXPORT_VISIBILITIES => array(),
             self::NAME_EXCLUDE_CATEGORIES => array(),
+            self::NAME_EXCLUDE_ALLOW_OFFERS_CATEGORIES => array(),
             self::NAME_LOGGING_LEVEL => 'error',
             self::NAME_LOGGING_APPLICATION => self::NAME_LOGGING_APPLICATION_OPTION_EXTENSION,
             self::NAME_TOKEN_DOWNLOAD => self::generateToken(),
@@ -271,9 +278,14 @@ class Settings
                 self::NAME_EXCLUDE_CATEGORIES => array(
                     self::NAME_WORDINGS_TITLE => 'Included Categories',
                     self::NAME_WORDINGS_DESCRIPTION => '',
-                    //                    self::nameWordingsValidator => function ($value) {
-                    //                        return is_array($value);
-                    //                    },
+                    self::NAME_WORDINGS_VALIDATOR => array(
+                        'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                        'validateIsArray'
+                    ),
+                ),
+                self::NAME_EXCLUDE_ALLOW_OFFERS_CATEGORIES => array(
+                    self::NAME_WORDINGS_TITLE => 'Included Categories',
+                    self::NAME_WORDINGS_DESCRIPTION => '',
                     self::NAME_WORDINGS_VALIDATOR => array(
                         'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
                         'validateIsArray'
@@ -615,6 +627,11 @@ class Settings
     public function getExcludeCategories()
     {
         return $this->settings[self::NAME_EXCLUDE_CATEGORIES];
+    }
+
+    public function getExcludeAllowOffersCategories()
+    {
+        return $this->settings[self::NAME_EXCLUDE_ALLOW_OFFERS_CATEGORIES];
     }
 
     public function setExcludeCategories($value = array())

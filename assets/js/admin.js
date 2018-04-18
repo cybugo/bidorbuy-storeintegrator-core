@@ -78,6 +78,38 @@ jQuery(document).ready(function () {
         return false;
     });
 
+    jQuery("#include-allow-offers").click(function () {
+        var newOptions = {};
+        jQuery("#bobsi-exc-allow-offers-categories option:selected").each(function () {
+            newOptions[jQuery(this).val()] = [];
+            newOptions[jQuery(this).val()]['val'] = jQuery(this).text();
+            newOptions[jQuery(this).val()]['style'] = (typeof jQuery(this).attr('style')) == 'undefined' ? '' : jQuery(this).attr('style');
+            jQuery(this).remove();
+        });
+
+        jQuery.each(newOptions, function (key, value) {
+            jQuery("#bobsi-inc-allow-offers-categories").append('<option style="' + value['style'] + '" value='+key+'>'+value['val']+'</option>');
+        });
+
+        return false;
+    });
+
+    jQuery("#exclude-allow-offers").click(function () {
+        var newOptions = {};
+        jQuery("#bobsi-inc-allow-offers-categories option:selected").each(function () {
+            newOptions[jQuery(this).val()] = [];
+            newOptions[jQuery(this).val()]['val'] = jQuery(this).text();
+            newOptions[jQuery(this).val()]['style'] = (typeof jQuery(this).attr('style')) == 'undefined' ? '' : jQuery(this).attr('style');
+            jQuery(this).remove();
+        });
+
+        jQuery.each(newOptions, function (key, value) {
+            jQuery("#bobsi-exc-allow-offers-categories").append('<option style="' + value['style'] + '" value='+key+'>'+value['val']+'</option>');
+        });
+
+        return false;
+    });
+
     jQuery("#include-stat").click(function () {
         var newOptions = {};
         jQuery("#bobsi-exc-statuses option:selected").each(function () {
@@ -108,6 +140,7 @@ jQuery(document).ready(function () {
 
     jQuery('#submit').click(function () {
         jQuery('#bobsi-exc-categories option').prop('selected', 'selected');
+        jQuery('#bobsi-exc-allow-offers-categories option').prop('selected', 'selected');
         jQuery('#bobsi-inc-statuses option').prop('selected', 'selected');
     });
 

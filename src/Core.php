@@ -1,7 +1,9 @@
-<?php
-
-/**
- * Copyright (c) 2014, 2015, 2016 Bidorbuy http://www.bidorbuy.co.za
+<?php /*
+ * #%L
+ * Bidorbuy http://www.bidorbuy.co.za
+ * %%
+ * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * %%
  * This software is the proprietary information of Bidorbuy.
  *
  * All Rights Reserved.
@@ -10,7 +12,9 @@
  * holder.
  *
  * Vendor: EXTREME IDEA LLC http://www.extreme-idea.com
- */
+ * #L%
+ */ ?>
+<?php
 
 namespace com\extremeidea\bidorbuy\storeintegrator\core;
 
@@ -1660,6 +1664,7 @@ class Core
         if ($serverName && $port) {
             $serverName = str_replace(":{$port}", '', $serverName);
         }
+
         return $serverName;
     }
 
@@ -1781,6 +1786,8 @@ class Core
         return $old->getExportQuantityMoreThan() != $new->getExportQuantityMoreThan()
             || count(array_diff($old->getExcludeCategories(), $new->getExcludeCategories())) > 0
             || count(array_diff($new->getExcludeCategories(), $old->getExcludeCategories())) > 0
+            || count(array_diff($old->getExcludeAllowOffersCategories(), $new->getExcludeAllowOffersCategories())) > 0
+            || count(array_diff($new->getExcludeAllowOffersCategories(), $old->getExcludeAllowOffersCategories())) > 0
             || count(array_diff($old->getExportStatuses(), $new->getExportStatuses())) > 0
             || count(array_diff($new->getExportStatuses(), $old->getExportStatuses())) > 0
             || $old->getDefaultStockQuantity() != $new->getDefaultStockQuantity()
@@ -1884,6 +1891,8 @@ class Core
             ? doubleval($data[Tradefeed::NAME_PRODUCT_PRICE]) : 0;
         $array['market_price'] = (isset($data[Tradefeed::NAME_PRODUCT_MARKET_PRICE]))
             ? doubleval($data[Tradefeed::NAME_PRODUCT_MARKET_PRICE]) : 0;
+        $array['allow_offers'] = isset($data[Tradefeed::NAME_PRODUCT_ALLOW_OFFERS])
+        && $data[Tradefeed::NAME_PRODUCT_ALLOW_OFFERS] ? 1 : 0;
         $array['available_quantity'] = (isset($data[Tradefeed::NAME_PRODUCT_AVAILABLE_QTY]))
             ? intval($data[Tradefeed::NAME_PRODUCT_AVAILABLE_QTY]) : 0;
         $array['condition'] =(isset($data[Tradefeed::NAME_PRODUCT_CONDITION]))

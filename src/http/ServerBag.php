@@ -1,7 +1,9 @@
-<?php
-
-/**
- * Copyright (c) 2014, 2015, 2016 Bidorbuy http://www.bidorbuy.co.za
+<?php /*
+ * #%L
+ * Bidorbuy http://www.bidorbuy.co.za
+ * %%
+ * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * %%
  * This software is the proprietary information of Bidorbuy.
  *
  * All Rights Reserved.
@@ -10,7 +12,9 @@
  * holder.
  *
  * Vendor: EXTREME IDEA LLC http://www.extreme-idea.com
- */
+ * #L%
+ */ ?>
+<?php
 
 namespace com\extremeidea\bidorbuy\storeintegrator\core\http;
 

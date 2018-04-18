@@ -1,7 +1,9 @@
-<?php
-
-/**
- * Copyright (c) 2014, 2015, 2016 Bidorbuy http://www.bidorbuy.co.za
+<?php /*
+ * #%L
+ * Bidorbuy http://www.bidorbuy.co.za
+ * %%
+ * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * %%
  * This software is the proprietary information of Bidorbuy.
  *
  * All Rights Reserved.
@@ -10,7 +12,9 @@
  * holder.
  *
  * Vendor: EXTREME IDEA LLC http://www.extreme-idea.com
- */
+ * #L%
+ */ ?>
+<?php
 
 namespace com\extremeidea\bidorbuy\storeintegrator\core;
 
@@ -37,6 +41,7 @@ class Tradefeed
     const NAME_PRODUCT_CATEGORY = 'Category';
     const NAME_PRODUCT_PRICE = 'Price';
     const NAME_PRODUCT_MARKET_PRICE = 'MarketPrice';
+    const NAME_PRODUCT_ALLOW_OFFERS = 'AllowOffers';
     const NAME_PRODUCT_AVAILABLE_QTY = 'AvailableQty';
     const NAME_PRODUCT_CONDITION = 'Condition';
     const NAME_PRODUCT_ATTRIBUTES = 'ProductAttributes';
@@ -171,6 +176,7 @@ class Tradefeed
             self::NAME_PRODUCT_NAME => null,
             self::NAME_PRODUCT_PRICE => null,
             self::NAME_PRODUCT_MARKET_PRICE => null,
+            self::NAME_PRODUCT_ALLOW_OFFERS => false,
             self::NAME_PRODUCT_AVAILABLE_QTY => null,
             self::NAME_PRODUCT_IMAGES => array(),
             self::NAME_PRODUCT_SUMMARY => null,
@@ -737,6 +743,12 @@ class Tradefeed
         $output .= self::section(self::NAME_PRODUCT_CATEGORY, $data[self::NAME_PRODUCT_CATEGORY], true, 3);
         $output .= self::section(self::NAME_PRODUCT_PRICE, $data[self::NAME_PRODUCT_PRICE], true, 3);
         $output .= self::section(self::NAME_PRODUCT_MARKET_PRICE, $data[self::NAME_PRODUCT_MARKET_PRICE], true, 3);
+        $output .= self::section(
+            self::NAME_PRODUCT_ALLOW_OFFERS,
+            $data[self::NAME_PRODUCT_ALLOW_OFFERS] ? 'true' : 'false',
+            false,
+            3
+        );
         $output .= self::section(self::NAME_PRODUCT_AVAILABLE_QTY, $data[self::NAME_PRODUCT_AVAILABLE_QTY], true, 3);
         $output .= self::section(self::NAME_PRODUCT_CONDITION, $data[self::NAME_PRODUCT_CONDITION], false, 3);
 

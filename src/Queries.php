@@ -1,7 +1,9 @@
-<?php
-
-/**
- * Copyright (c) 2014, 2015, 2016 Bidorbuy http://www.bidorbuy.co.za
+<?php /*
+ * #%L
+ * Bidorbuy http://www.bidorbuy.co.za
+ * %%
+ * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * %%
  * This software is the proprietary information of Bidorbuy.
  *
  * All Rights Reserved.
@@ -10,7 +12,9 @@
  * holder.
  *
  * Vendor: EXTREME IDEA LLC http://www.extreme-idea.com
- */
+ * #L%
+ */ ?>
+<?php
 
 namespace com\extremeidea\bidorbuy\storeintegrator\core;
 
@@ -70,6 +74,7 @@ class Queries
               `category` varchar(2000) NOT NULL,
               `price` decimal(20,6) NOT NULL DEFAULT '0.000000',
               `market_price` decimal(20,6) DEFAULT '0.000000',
+              `allow_offers` tinyint(1) DEFAULT '0',
               `available_quantity` int(10) NOT NULL DEFAULT '0',
               `condition` varchar(16) NOT NULL,
               `image_url` varchar(1024),
@@ -403,6 +408,13 @@ class Queries
                 3
             )
             . "'), '')";
+        $query[] = "IF(t.`allow_offers` = 1, "
+            . "'" . $this->tradefeed->section(Tradefeed::NAME_PRODUCT_ALLOW_OFFERS, "true", false, 3) . "', "
+            . "'" . $this->tradefeed->section(Tradefeed::NAME_PRODUCT_ALLOW_OFFERS, "false", false, 3) . "'"
+            . ")";
+
+
+
         $query[] = "'"
             . $this->tradefeed->section(
                 Tradefeed::NAME_PRODUCT_AVAILABLE_QTY,

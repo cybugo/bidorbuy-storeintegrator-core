@@ -1549,15 +1549,7 @@ class Core
         ));
         $mrHandler->setConnectionsLimit(4);
 
-        $headers = array();
-        $headers[] = 'Accept: text/xml,application/xml,application/xhtml+xml,text/html;'
-            . 'q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5';
-        $headers[] = 'Cache-Control: no-cache';
-        $headers[] = 'Connection: Keep-Alive';
-        $headers[] = 'Keep-Alive: 300';
-        $headers[] = 'Accept-Charset: UTF-8,Windows-1251,ISO-8859-1;q=0.7,*;q=0.7';
-        $headers[] = 'Accept-Language: ru,en-us,en;q=0.5';
-        $headers[] = 'Pragma:';
+        $headers = $this->getExportHeaders();
         $mrHandler->requestsDefaults()->addHeaders($headers);
 
         $options = array();
@@ -1603,6 +1595,22 @@ class Core
 
         $mrHandler->start();
     }
+
+    protected function getExportHeaders()
+    {
+        $headers = array();
+        $headers[] = 'Accept: text/xml,application/xml,application/xhtml+xml,text/html;'
+            . 'q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5';
+        $headers[] = 'Cache-Control: no-cache';
+        $headers[] = 'Connection: Keep-Alive';
+        $headers[] = 'Keep-Alive: 300';
+        $headers[] = 'Accept-Charset: UTF-8,Windows-1251,ISO-8859-1;q=0.7,*;q=0.7';
+        $headers[] = 'Accept-Language: ru,en-us,en;q=0.5';
+        $headers[] = 'Pragma:';
+
+        return $headers;
+    }
+
 
     /**
      * Show memory usage
@@ -1786,8 +1794,8 @@ class Core
         return $old->getExportQuantityMoreThan() != $new->getExportQuantityMoreThan()
             || count(array_diff($old->getExcludeCategories(), $new->getExcludeCategories())) > 0
             || count(array_diff($new->getExcludeCategories(), $old->getExcludeCategories())) > 0
-            || count(array_diff($old->getExcludeAllowOffersCategories(), $new->getExcludeAllowOffersCategories())) > 0
-            || count(array_diff($new->getExcludeAllowOffersCategories(), $old->getExcludeAllowOffersCategories())) > 0
+            || count(array_diff($old->getIncludeAllowOffersCategories(), $new->getIncludeAllowOffersCategories())) > 0
+            || count(array_diff($new->getIncludeAllowOffersCategories(), $old->getIncludeAllowOffersCategories())) > 0
             || count(array_diff($old->getExportStatuses(), $new->getExportStatuses())) > 0
             || count(array_diff($new->getExportStatuses(), $old->getExportStatuses())) > 0
             || $old->getDefaultStockQuantity() != $new->getDefaultStockQuantity()

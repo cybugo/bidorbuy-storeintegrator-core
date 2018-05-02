@@ -46,7 +46,7 @@ class Settings
 
     const NAME_EXPORT_QUANTITY_MORE_THAN = 'exportQuantityMoreThan';
     const NAME_EXCLUDE_CATEGORIES = 'excludeCategories';
-    const NAME_EXCLUDE_ALLOW_OFFERS_CATEGORIES = 'excludeAllowOffersCategories';
+    const NAME_INCLUDE_ALLOW_OFFERS_CATEGORIES = 'includeAllowOffersCategories';
     const NAME_EXPORT_STATUSES = 'exportStatuses';
     const NAME_EXPORT_VISIBILITIES = 'exportVisibilities';
 
@@ -130,7 +130,7 @@ class Settings
             self::NAME_EXPORT_STATUSES => array(),
             self::NAME_EXPORT_VISIBILITIES => array(),
             self::NAME_EXCLUDE_CATEGORIES => array(),
-            self::NAME_EXCLUDE_ALLOW_OFFERS_CATEGORIES => array(),
+            self::NAME_INCLUDE_ALLOW_OFFERS_CATEGORIES => array(),
             self::NAME_LOGGING_LEVEL => 'error',
             self::NAME_LOGGING_APPLICATION => self::NAME_LOGGING_APPLICATION_OPTION_EXTENSION,
             self::NAME_TOKEN_DOWNLOAD => self::generateToken(),
@@ -283,8 +283,8 @@ class Settings
                         'validateIsArray'
                     ),
                 ),
-                self::NAME_EXCLUDE_ALLOW_OFFERS_CATEGORIES => array(
-                    self::NAME_WORDINGS_TITLE => 'Included Categories',
+                self::NAME_INCLUDE_ALLOW_OFFERS_CATEGORIES => array(
+                    self::NAME_WORDINGS_TITLE => 'Included Allow Offers Categories',
                     self::NAME_WORDINGS_DESCRIPTION => '',
                     self::NAME_WORDINGS_VALIDATOR => array(
                         'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
@@ -629,9 +629,9 @@ class Settings
         return $this->settings[self::NAME_EXCLUDE_CATEGORIES];
     }
 
-    public function getExcludeAllowOffersCategories()
+    public function getIncludeAllowOffersCategories()
     {
-        return $this->settings[self::NAME_EXCLUDE_ALLOW_OFFERS_CATEGORIES];
+        return $this->settings[self::NAME_INCLUDE_ALLOW_OFFERS_CATEGORIES];
     }
 
     public function setExcludeCategories($value = array())

@@ -140,7 +140,7 @@ jQuery(document).ready(function () {
 
     jQuery('#submit').click(function () {
         jQuery('#bobsi-exc-categories option').prop('selected', 'selected');
-        jQuery('#bobsi-exc-allow-offers-categories option').prop('selected', 'selected');
+        jQuery('#bobsi-inc-allow-offers-categories option').prop('selected', 'selected');
         jQuery('#bobsi-inc-statuses option').prop('selected', 'selected');
     });
 

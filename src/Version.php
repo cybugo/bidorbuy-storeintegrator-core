@@ -30,7 +30,7 @@ class Version
 
     public static $id = 'bidorbuystoreintegrator';
     public static $version = '';
-    public static $coreVersion = '2.6.1';
+    public static $coreVersion = '2.6.2';
     public static $name = 'bidorbuy Store Integrator';
     public static $description = 'The bidorbuy store integrator allows you to get products from your online store 
     listed on bidorbuy quickly and easily.';

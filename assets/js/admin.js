@@ -138,10 +138,80 @@ jQuery(document).ready(function () {
         return false;
     });
 
+    // Secondhand action categories
+
+    jQuery("#includeProductConditionSecondhandCategories").click(function () {
+        var newOptions = {};
+        jQuery("#productConditionNewCategories option:selected").each(function () {
+            newOptions[jQuery(this).val()] = [];
+            newOptions[jQuery(this).val()]['val'] = jQuery(this).text();
+            newOptions[jQuery(this).val()]['style'] = (typeof jQuery(this).attr('style')) == 'undefined' ? '' : jQuery(this).attr('style');
+            jQuery(this).remove();
+        });
+
+        jQuery.each(newOptions, function (key, value) {
+            jQuery("#productConditionSecondhandCategories").append('<option style="' + value['style'] + '" value='+key+'>'+value['val']+'</option>');
+        });
+
+        return false;
+    });
+
+    jQuery("#excludeProductConditionSecondhandCategories").click(function () {
+        var newOptions = {};
+        jQuery("#productConditionSecondhandCategories option:selected").each(function () {
+            newOptions[jQuery(this).val()] = [];
+            newOptions[jQuery(this).val()]['val'] = jQuery(this).text();
+            newOptions[jQuery(this).val()]['style'] = (typeof jQuery(this).attr('style')) == 'undefined' ? '' : jQuery(this).attr('style');
+            jQuery(this).remove();
+        });
+
+        jQuery.each(newOptions, function (key, value) {
+            jQuery("#productConditionNewCategories").append('<option style="' + value['style'] + '" value='+key+'>'+value['val']+'</option>');
+        });
+
+        return false;
+    });
+
+    // Refurbished action categories
+
+    jQuery("#includeProductConditionRefurbishedCategories").click(function () {
+        var newOptions = {};
+        jQuery("#productConditionNewCategories option:selected").each(function () {
+            newOptions[jQuery(this).val()] = [];
+            newOptions[jQuery(this).val()]['val'] = jQuery(this).text();
+            newOptions[jQuery(this).val()]['style'] = (typeof jQuery(this).attr('style')) == 'undefined' ? '' : jQuery(this).attr('style');
+            jQuery(this).remove();
+        });
+
+        jQuery.each(newOptions, function (key, value) {
+            jQuery("#productConditionRefurbishedCategories").append('<option style="' + value['style'] + '" value='+key+'>'+value['val']+'</option>');
+        });
+
+        return false;
+    });
+
+    jQuery("#excludeProductConditionRefurbishedCategories").click(function () {
+        var newOptions = {};
+        jQuery("#productConditionRefurbishedCategories option:selected").each(function () {
+            newOptions[jQuery(this).val()] = [];
+            newOptions[jQuery(this).val()]['val'] = jQuery(this).text();
+            newOptions[jQuery(this).val()]['style'] = (typeof jQuery(this).attr('style')) == 'undefined' ? '' : jQuery(this).attr('style');
+            jQuery(this).remove();
+        });
+
+        jQuery.each(newOptions, function (key, value) {
+            jQuery("#productConditionNewCategories").append('<option style="' + value['style'] + '" value='+key+'>'+value['val']+'</option>');
+        });
+
+        return false;
+    });
+
     jQuery('#submit').click(function () {
         jQuery('#bobsi-exc-categories option').prop('selected', 'selected');
         jQuery('#bobsi-inc-allow-offers-categories option').prop('selected', 'selected');
         jQuery('#bobsi-inc-statuses option').prop('selected', 'selected');
+        jQuery('#productConditionSecondhandCategories option').prop('selected', 'selected');
+        jQuery('#productConditionRefurbishedCategories option').prop('selected', 'selected');
     });
 
     /*

@@ -1798,6 +1798,34 @@ class Core
             || count(array_diff($new->getIncludeAllowOffersCategories(), $old->getIncludeAllowOffersCategories())) > 0
             || count(array_diff($old->getExportStatuses(), $new->getExportStatuses())) > 0
             || count(array_diff($new->getExportStatuses(), $old->getExportStatuses())) > 0
+            // Product condition
+            // Secondhand categories
+            || count(
+                array_diff(
+                    $old->getSecondhandProductConditionCategories(),
+                    $new->getSecondhandProductConditionCategories()
+                )
+            ) > 0
+            || count(
+                array_diff(
+                    $new->getSecondhandProductConditionCategories(),
+                    $old->getSecondhandProductConditionCategories()
+                )
+            ) > 0
+            // Refurbished categories
+            || count(
+                array_diff(
+                    $old->getRefurbishedProductConditionCategories(),
+                    $new->getRefurbishedProductConditionCategories()
+                )
+            ) > 0
+            || count(
+                array_diff(
+                    $new->getRefurbishedProductConditionCategories(),
+                    $old->getRefurbishedProductConditionCategories()
+                )
+            ) > 0
+            //------------
             || $old->getDefaultStockQuantity() != $new->getDefaultStockQuantity()
             || $old->getExportProductSummary() != $new->getExportProductSummary()
             || $old->getExportProductDescription() != $new->getExportProductDescription();

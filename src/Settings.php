@@ -2,7 +2,7 @@
  * #%L
  * Bidorbuy http://www.bidorbuy.co.za
  * %%
- * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * Copyright (C) 2014 - 2019 Bidorbuy http://www.bidorbuy.co.za
  * %%
  * This software is the proprietary information of Bidorbuy.
  *
@@ -16,7 +16,7 @@
  */ ?>
 <?php
 
-namespace com\extremeidea\bidorbuy\storeintegrator\core;
+namespace Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core;
 
 /**
  * Class Settings
@@ -158,7 +158,7 @@ class Settings
                     <a href=\'http://en.wikipedia.org/wiki/Basic_access_authentication\' 
                     target=\'_blank\'>Basic Access Authentication</a>',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateTrue'
                 ),
             ),
@@ -168,7 +168,7 @@ class Settings
                     <a href=\'http://en.wikipedia.org/wiki/Basic_access_authentication\' 
                     target=\'_blank\'>Basic Access Authentication</a>',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateTrue'
                 ),
             ),
@@ -176,7 +176,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Export currency',
                 self::NAME_WORDINGS_DESCRIPTION => 'If not selected, the default currency is used.',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateTrue'
                 ),
             ),
@@ -185,7 +185,7 @@ class Settings
                 self::NAME_WORDINGS_DESCRIPTION => '16 characters max. Must start with a letter.<br>
                     Can contain letters, digits, "-" and "_"',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateNameFileName'
                 ),
             ),
@@ -194,7 +194,7 @@ class Settings
                 self::NAME_WORDINGS_DESCRIPTION => 'Choose a Compress Library to ' .
                     'compress destination Tradefeed XML',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateNameCompressLibrary'
                 ),
             ),
@@ -202,7 +202,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Min quantity in stock',
                 self::NAME_WORDINGS_DESCRIPTION => 'Set minimum quantity if quantity management is turned OFF',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateNameDefaultStockQuantity'
                 ),
             ),
@@ -211,7 +211,7 @@ class Settings
                 self::NAME_WORDINGS_DESCRIPTION => 'Products with stock quantities lower than this value will be 
                                                         excluded from the XML feed',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateNameExportQuantityMoreThan'
                 ),
             ),
@@ -219,7 +219,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Export statuses',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateIsArray'
                 ),
             ),
@@ -227,7 +227,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Export visibilities',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateIsArray'
                 ),
             ),
@@ -236,7 +236,7 @@ class Settings
                 self::NAME_WORDINGS_DESCRIPTION => 'A level describes the severity of a logging message. 
                         There are six levels, show here in descending order of severity',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateNameLoggingLevel'
                 ),
             ),
@@ -246,7 +246,7 @@ class Settings
                     'All (logging all messages), Only PHP Errors (logging only php errors), ' .
                     'Only Store Integrator Errors (logging only Store integrator messages)',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateNameLoggingApplication'
                 ),
             ),
@@ -254,7 +254,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Included Categories',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateIsArray'
                 ),
             ),
@@ -262,7 +262,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Included Allow Offers Categories',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateIsArray'
                 ),
             ),
@@ -270,7 +270,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Secondhand Categories',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateIsArray'
                 ),
             ),
@@ -278,7 +278,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Refurbished Categories',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateIsArray'
                 ),
             ),
@@ -286,7 +286,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Export Configuration',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateTrue'
                 ),
             ),
@@ -294,7 +294,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Export Criteria',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateTrue'
                 ),
             ),
@@ -302,7 +302,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Links',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateTrue'
                 ),
             ),
@@ -310,7 +310,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Export',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateNotEmpty'
                 ),
             ),
@@ -318,7 +318,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Download',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateNotEmpty'
                 ),
             ),
@@ -334,7 +334,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Download Tradefeed',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateTrue'
                 ),
             ),
@@ -342,7 +342,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Reset tokens',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateTrue'
                 ),
             ),
@@ -350,7 +350,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Advanced',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateTrue'
                 ),
             ),
@@ -361,7 +361,7 @@ class Settings
                     to the export and completing the query. Please note, you will still need to run the export 
                     link once this process completes in order to update the download file.',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     '__validate_not_empty'
                 ),
             ),
@@ -369,7 +369,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Launch',
                 self::NAME_WORDINGS_DESCRIPTION => '',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateTrue'
                 ),
             ),
@@ -377,7 +377,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Export Product Summary',
                 self::NAME_WORDINGS_DESCRIPTION => 'Check to export product summary to tradefeed',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateIsBool'
                 ),
             ),
@@ -386,7 +386,7 @@ class Settings
                 self::NAME_WORDINGS_TITLE => 'Export Product Description',
                 self::NAME_WORDINGS_DESCRIPTION => 'Check to export product description to tradefeed',
                 self::NAME_WORDINGS_VALIDATOR => array(
-                    'com\extremeidea\bidorbuy\storeintegrator\core\Settings',
+                    'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\Settings',
                     'validateIsBool'
                 ),
             ),

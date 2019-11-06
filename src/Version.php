@@ -2,7 +2,7 @@
  * #%L
  * Bidorbuy http://www.bidorbuy.co.za
  * %%
- * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * Copyright (C) 2014 - 2019 Bidorbuy http://www.bidorbuy.co.za
  * %%
  * This software is the proprietary information of Bidorbuy.
  *
@@ -16,7 +16,7 @@
  */ ?>
 <?php
 
-namespace com\extremeidea\bidorbuy\storeintegrator\core;
+namespace Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core;
 
 /**
  * Class Version
@@ -30,7 +30,7 @@ class Version
 
     public static $id = 'bidorbuystoreintegrator';
     public static $version = '';
-    public static $coreVersion = '2.7.0';
+    public static $coreVersion = '3.1.7';
     public static $name = 'bidorbuy Store Integrator';
     public static $description = 'The bidorbuy store integrator allows you to get products from your online store 
     listed on bidorbuy quickly and easily.';
@@ -62,7 +62,7 @@ class Version
      *
      * @return array
      */
-    public static function getMetrics()
+    public static function getMetrics(): array
     {
         $value = array();
 

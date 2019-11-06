@@ -2,8 +2,19 @@
 Options -Indexes
 
 # Protect files and directories from prying eyes.
-<FilesMatch "\.(log|dat|properties)$">
-	Order allow,deny
-    Deny from all
-    Satisfy all
-</FilesMatch>
+
+# Apache 2.2
+<IfModule !mod_authz_core.c>
+    <FilesMatch "\.(log|dat|properties)$">
+    	Order allow,deny
+        Deny from all
+        Satisfy all
+    </FilesMatch>
+</IfModule>
+
+# Apache 2.4
+<IfModule mod_authz_core.c>
+    <FilesMatch "\.(log|dat|properties)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>

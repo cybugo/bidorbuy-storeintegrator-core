@@ -1,10 +1,18 @@
 {
-  "name": "extremeidea/bidorbuy-storeintegrator-core",
-  "description": "bidorbuy Store Integrator Core.",
-  "version": "2.7.0",
+  "name": "com.extremeidea.bidorbuy/storeintegrator-core",
+  "description": "Bidorbuy Store Integrator - Core.",
+  "version": "3.1.7",
+  "homepage": "https://www.extreme-idea.com",
+  "keywords": [
+    "bidorbuy",
+    "store",
+    "integrator",
+    "core"
+  ],
+  "time": "2019-11-06 11:48:26",
   "autoload": {
     "psr-4": {
-      "com\\extremeidea\\bidorbuy\\storeintegrator\\core\\": "src/"
+      "Com\\ExtremeIdea\\Bidorbuy\\StoreIntegrator\\Core\\": "src/"
     }
   }
 }

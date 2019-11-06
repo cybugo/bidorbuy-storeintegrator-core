@@ -2,7 +2,7 @@
  * #%L
  * Bidorbuy http://www.bidorbuy.co.za
  * %%
- * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * Copyright (C) 2014 - 2019 Bidorbuy http://www.bidorbuy.co.za
  * %%
  * This software is the proprietary information of Bidorbuy.
  *
@@ -16,7 +16,7 @@
  */ ?>
 <?php
 
-namespace com\extremeidea\bidorbuy\storeintegrator\core;
+namespace Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core;
 
 class GA
 {
@@ -74,7 +74,7 @@ class GA
      */
     public function __construct($userAgent = null, $domain = null)
     {
-        $this->request = new http\Request();
+        $this->request = new Http\Request();
 
         $this->data['utmac'] = $userAgent;
         $this->data['utmhn'] = isset($domain) ? $domain : $this->request->server->get('SERVER_NAME');

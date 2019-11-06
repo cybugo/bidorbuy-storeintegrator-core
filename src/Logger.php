@@ -2,7 +2,7 @@
  * #%L
  * Bidorbuy http://www.bidorbuy.co.za
  * %%
- * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * Copyright (C) 2014 - 2019 Bidorbuy http://www.bidorbuy.co.za
  * %%
  * This software is the proprietary information of Bidorbuy.
  *
@@ -16,7 +16,7 @@
  */ ?>
 <?php
 
-namespace com\extremeidea\bidorbuy\storeintegrator\core;
+namespace Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core;
 
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\RotatingFileHandler;

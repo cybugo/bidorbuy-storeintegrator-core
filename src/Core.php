@@ -2,7 +2,7 @@
  * #%L
  * Bidorbuy http://www.bidorbuy.co.za
  * %%
- * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * Copyright (C) 2014 - 2019 Bidorbuy http://www.bidorbuy.co.za
  * %%
  * This software is the proprietary information of Bidorbuy.
  *
@@ -16,7 +16,7 @@
  */ ?>
 <?php
 
-namespace com\extremeidea\bidorbuy\storeintegrator\core;
+namespace Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core;
 
 use com\extremeidea\bidorbuy\storeintegrator\php\multirequest\MultiRequestHandler;
 use com\extremeidea\bidorbuy\storeintegrator\php\multirequest\MultiRequestRequest;
@@ -124,7 +124,7 @@ class Core
      */
     public function __construct()
     {
-        $this->request = new http\Request();
+        $this->request = new Http\Request();
 
         $this->timeStart = $this->request->server->get('REQUEST_TIME') ?: time();
 
@@ -561,7 +561,7 @@ class Core
                 'result' => !isset($exportConfiguration[Settings::PARAM_CATEGORIES])
                     || (isset($exportConfiguration[Settings::PARAM_CATEGORIES])
                         && !is_array($exportConfiguration[Settings::PARAM_CATEGORIES])),
-                'messsage' => 'paramCategories is undefined.'
+                'message' => 'paramCategories is undefined.'
             ),
 
             array(
@@ -1493,8 +1493,11 @@ class Core
             header('Content-Length: ' . $this->getFileSize($file));
         }
 
-        /* Defect: #4124 */
-        $this->addZlibHeaders($zlib_enabled);
+        /* Defect: #4124  */
+        /* Defect: #5593  */
+        /* Support: #5588 */
+        // Delete incorrect headers.
+        //$this->addZlibHeaders($zlib_enabled);
         /*  ***  */
 
         ini_set("zlib.output_compression", "Off");
@@ -1861,8 +1864,8 @@ class Core
 
         if (!isset($instance)) {
             $class =
-                'mysqli' == $this->selectMySQLPhpExtension() ? 'com\extremeidea\bidorbuy\storeintegrator\core\MySQLi'
-                    : 'com\extremeidea\bidorbuy\storeintegrator\core\MySQL';
+                'mysqli' == $this->selectMySQLPhpExtension() ? 'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\MySQLi'
+                    : 'Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core\MySQL';
             $instance = new $class($server, $user, $password, $database, false);
         }
 
@@ -2036,22 +2039,5 @@ class Core
     public function callExit($status = '')
     {
         exit($status);
-    }
-
-    /**
-     * Add Zlib headers if extension is active
-     *
-     * @param boolean $zlibEnabled zlib status(on/off)
-     *
-     * @return mixed
-     */
-    protected function addZlibHeaders($zlibEnabled)
-    {
-        if ($zlibEnabled) {
-            header('Content-Encoding: gzip');
-            header('Vary: Accept-Encoding');
-        }
-
-        return false;
     }
 }

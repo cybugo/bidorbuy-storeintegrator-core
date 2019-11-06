@@ -2,7 +2,7 @@
  * #%L
  * Bidorbuy http://www.bidorbuy.co.za
  * %%
- * Copyright (C) 2014 - 2018 Bidorbuy http://www.bidorbuy.co.za
+ * Copyright (C) 2014 - 2019 Bidorbuy http://www.bidorbuy.co.za
  * %%
  * This software is the proprietary information of Bidorbuy.
  *
@@ -16,7 +16,7 @@
  */ ?>
 <?php
 
-namespace com\extremeidea\bidorbuy\storeintegrator\core;
+namespace Com\ExtremeIdea\Bidorbuy\StoreIntegrator\Core;
 
 /**
  * @SuppressWarnings(PHPMD.ConstantNamingConventions)
@@ -232,8 +232,9 @@ class Tradefeed
             self::NAME_PRODUCT_NAME_MAX_LENGTH
         );
 
-        foreach ($nameAttributesOrder as $v) {
-            list($k, $v) = each($v);
+        foreach ($nameAttributesOrder as $item) {
+            $k = key($item);
+            $v = current($item);
             if (self::isMeasurable($k)) {
                 $value = self::formatPrice($v);
                 $units = self::getUnits(self::getAttrValue($v));
